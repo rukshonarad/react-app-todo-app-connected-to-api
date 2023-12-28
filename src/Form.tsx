@@ -1,9 +1,15 @@
-export const Form = ({
-    isSubmitButtonDisabled,
-    todoValue,
-    handleTodoValue,
-    createTodo
-}) => {
+import React from "react";
+
+type FormProps = {
+    isSubmitButtonDisabled: boolean;
+    todoValue: string;
+    handleTodoValue: (value: string) => void;
+    createTodo: (e: React.FormEvent<HTMLFormElement>) => void;
+};
+
+export const Form: React.FC<FormProps> = (props) => {
+    const { isSubmitButtonDisabled, todoValue, handleTodoValue, createTodo } =
+        props;
     return (
         <form onSubmit={createTodo}>
             <input

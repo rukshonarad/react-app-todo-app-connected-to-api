@@ -1,8 +1,11 @@
 class TodoAPI {
+    private endpoint: string;
+
     constructor() {
-        this.endpoint = process.env.REACT_APP_API;
+        this.endpoint = process.env.REACT_APP_API as string;
     }
-    async create(text) {
+
+    async create(text: string) {
         try {
             const response = await fetch(`${this.endpoint}/tasks`, {
                 method: "POST",
@@ -21,14 +24,15 @@ class TodoAPI {
 
             return await response.json();
         } catch (error) {
-            console.log(error.message);
+            console.log(error);
         }
     }
+
     async getAll() {
         try {
             const response = await fetch(`${this.endpoint}/tasks`);
             if (!response.ok) {
-                throw new Error(response.error);
+                throw new Error(response.statusText);
             }
 
             return await response.json();
@@ -37,7 +41,7 @@ class TodoAPI {
         }
     }
 
-    async deleteOne(id) {
+    async deleteOne(id: string) {
         try {
             const response = await fetch(`${this.endpoint}/tasks/${id}`, {
                 method: "DELETE"
@@ -48,11 +52,11 @@ class TodoAPI {
                 throw new Error(data.message);
             }
         } catch (error) {
-            console.log(error.message);
+            console.log((error as Error).message);
         }
     }
 
-    async updateStatus(id, status) {
+    async updateStatus(id: string, status: string) {
         try {
             const response = await fetch(`${this.endpoint}/tasks/${id}`, {
                 method: "PATCH",
@@ -69,7 +73,7 @@ class TodoAPI {
                 throw new Error(data.message);
             }
         } catch (error) {
-            console.log(error.message);
+            console.log((error as Error).message);
         }
     }
 }

@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { todoApi } from "./api/todo";
+import { todoApi } from "./api/todoApi";
 import { Form } from "./Form";
 import { Todos } from "./Todos";
 import "./App.css";
-
 type Todo = {
     id: string;
     text: string;
     status: "TODO" | "INPROGRESS" | "DONE";
 };
-
 const App: React.FC = () => {
     const [todos, setTodos] = useState<Todo[]>([]);
     const [todoInputValue, setTodoInputValue] = useState<string>("");
@@ -25,7 +23,7 @@ const App: React.FC = () => {
             });
     }, []);
 
-    const handleTodoInputChange = (value: string): void => {
+    const handleTodoInputChange = (value: string) => {
         setTodoInputValue(value);
     };
 
